@@ -23,6 +23,7 @@ function Topbar() {
         <NavLink to={keep('/')} end>Presidente</NavLink>
         <NavLink to={keep('/governador')}>Governador</NavLink>
         <NavLink to={keep('/senador')}>Senador</NavLink>
+        <NavLink to="/historico">Histórico</NavLink>
         <NavLink to="/metodologia">Metodologia</NavLink>
       </nav>
       <span className="spacer" />

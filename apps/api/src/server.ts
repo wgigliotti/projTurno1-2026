@@ -5,11 +5,13 @@ import { Cargo, CARGOS, Source, apiMapa, apiProjecao, iso, run, seriePoint } fro
 import { ReplaySource } from './replay.js';
 import { LiveSource } from './live.js';
 import { UFS } from './ufs.js';
+import { agendarFotos, gravarFoto, historico, SLOT_MS } from './fotos.js';
 
 const MODE = process.env.MODE ?? 'replay';
 const src: Source = MODE === 'live' ? new LiveSource() : new ReplaySource();
 const app = Fastify({ logger: false });
 await app.register(cors, { origin: true });
+await app.register((await import('@fastify/compress')).default, { threshold: 1024, encodings: ['gzip', 'br'] });
 await (src as any).init();
 
 const AVISO = 'Projeção não oficial, gerada por modelo estatístico. Resultado oficial: TSE (resultados.tse.jus.br).';
@@ -64,6 +66,16 @@ app.get<{ Params: { cargo: string; uf: string } }>('/api/serie/:cargo/:uf', asyn
   });
 });
 
+// ---- histórico (fotos a cada 5 min) ----
+const INICIO_FOTOS = Date.parse((process.env.FOTO_INICIO ?? '2026-10-04T17:05:00') + 'Z');   // hora de Brasília como 'naive UTC'
+app.get('/api/historico/tudo', async () => ({ ...(await historico(src.fonte)), inicio: iso(INICIO_FOTOS), atualizadoEm: iso(src.now()) }));
+app.get<{ Params: { cargo: string; uf: string } }>('/api/historico/:cargo/:uf', async (req, rep) => {
+  const { cargo } = req.params; if (cargo !== 'presidente' && cargo !== 'governador') return rep.code(404).send({ erro: 'cargo' });
+  const uf = normUf(cargo, req.params.uf);
+  const h = await historico(src.fonte, cargo, uf, 8); return { ...h, inicio: iso(INICIO_FOTOS), serie: h.series[`${cargo}/${uf}`] ?? null };
+});
+app.post('/api/foto/agora', async () => gravarFoto(src, Math.floor(src.now() / SLOT_MS) * SLOT_MS, 0));   // manual (teste)
+
 // ---- SSE ----
 const clients = new Set<any>();
 app.get('/api/stream', (req, rep) => {
@@ -92,4 +104,9 @@ const port = +(process.env.PORT ?? 3001);
 await app.listen({ port, host: '0.0.0.0' });
 console.log(`API ${MODE} em http://localhost:${port}`);
 if (src.fonte === 'replay') (src as ReplaySource).start(+(process.env.SPEED ?? 120));
+// fotos: ao vivo sempre; replay só com FOTO_REPLAY=1 (p/ desenvolver a tela)
+if (src.fonte === 'live' || process.env.FOTO_REPLAY === '1') {
+  const inicio = src.fonte === 'replay' ? 0 : INICIO_FOTOS;
+  agendarFotos(src, inicio, () => (src.fonte === 'live' ? Math.round((Date.now() - 3 * 3600e3 - src.now()) / 1000) : 0));
+}
 void pool;

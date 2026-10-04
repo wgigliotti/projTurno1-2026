@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import Presidente from './pages/Presidente';
 import Metodologia from './pages/Metodologia';
+const Historico = lazy(() => import('./pages/Historico'));
 const CargoPage = lazy(() => import('./pages/CargoPage'));
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
           <Route path="/" element={<Presidente />} />
           <Route path="/governador" element={<CargoPage cargo="governador" />} />
           <Route path="/senador" element={<CargoPage cargo="senador" />} />
+          <Route path="/historico" element={<Historico />} />
           <Route path="/metodologia" element={<Metodologia />} />
           <Route path="*" element={<Presidente />} />
         </Routes>

@@ -41,7 +41,7 @@ export class LiveSource implements Source {
   private snaps = new Map<string, Snapshot>();
   private etags = new Map<string, { etag: string; p: Parsed }>();
   private series = new Map<string, SeriePoint[]>();
-  private tse: string | null = null; private t = Date.now();
+  private tse: string | null = null; private t = Date.now() - 3 * 3600e3;   // hora de Brasília como 'naive UTC'
   now() { return this.t; }
   lastTSE() { return this.tse; }
   recordedSerie(cargo: Cargo, uf: string) { return this.series.get(`${cargo}/${uf}`) ?? []; }
@@ -173,7 +173,7 @@ export class LiveSource implements Source {
         brancos: p?.br ?? 0, nulos: p?.nu ?? 0, secTotal: p?.secTotal ?? 0, secApur: p?.secApur ?? 0, votos: p?.votos ?? {}, ref: { ...m.ref, q: QF[cargo] } });
     }
     for (const [key, munis] of out) { const cands = this.cands.get(key); if (cands) this.snaps.set(key, { cands, munis }); }
-    this.t = Date.now(); this.tse = this.newest ? `${this.newest}-03:00` : null; this.version++;
+    this.t = Date.now() - 3 * 3600e3; this.tse = this.newest ? `${this.newest}-03:00` : null; this.version++;
     this.recordSeries();
     void this.persist();
     console.log(`ciclo: ${reqs} req em ${Date.now() - t0}ms | rps=${this.rps.toFixed(0)} | fila restante=${this.pending} | ${blocked ? 'BLOQUEADO(429) ' : ''}TSE=${this.tse}`);

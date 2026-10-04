@@ -59,3 +59,19 @@ Evento `update` com `{ "relogio":"...", "pctEleitoresApurados":0.41 }` a cada no
 
 ## Replay (simulação com 2022) — só dev
 `POST /api/replay/start { "ano":2022, "velocidade":60 }`, `POST /api/replay/seek { "t":"2022-10-02T19:30:00-03:00" }`, `POST /api/replay/stop`. Em replay `meta.fonte="replay"`.
+
+## Histórico (fotos a cada 5 min) — só Presidente e Governador
+Tabelas `foto_apuracao` / `foto_candidato` (hora de Brasília). Gravadas de 5 em 5 min (alinhadas em :00, :05, :10…) a partir de `FOTO_INICIO` (padrão 2026-10-04T17:05).
+Cada foto guarda, por série, a **% real apurada** (`apurado`: % dos votos válidos já contados) e a **% projetada** (`projetado` + IC90 `lo`/`hi`), além de `pctEleitoresApurados`.
+
+### GET /api/historico/tudo
+```json
+{ "fonte":"live"|"replay","inicio":"2026-10-04T17:05:00-03:00","intervaloMin":5,"atualizadoEm":"...",
+  "series":{
+    "presidente/BR": { "cargo":"presidente","uf":"BR","nome":"Brasil",
+       "candidatos":[{"nr":13,"nome":"LULA","partido":"PT","campo":"lula"}],   // top 4 pela projeção mais recente
+       "pontos":[ {"t":"2026-10-04T17:05:00-03:00","pctEleitoresApurados":0.012,"secoesApuradas":123,"secoesTotal":499248,"prob2Turno":0.9,
+                   "cand":{"13":{"apurado":0.47,"projetado":0.452,"lo":0.43,"hi":0.47}}} ] },
+    "presidente/SP": {...}, "governador/SP": {...} } }
+```
+Chaves: `presidente/BR`, `presidente/<UF>`, `governador/<UF>` (27 UFs). Valores são frações 0–1. `GET /api/historico/:cargo/:uf` devolve o mesmo formato filtrado (mais `serie`, com até 8 candidatos). `POST /api/foto/agora` grava uma foto na hora (teste).

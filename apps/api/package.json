@@ -1,4 +1,1 @@
-{ "name": "@eleicao/api", "version": "0.1.0", "private": true, "type": "module",
-  "scripts": { "dev": "tsx watch src/server.ts", "start": "tsx src/server.ts" },
-  "dependencies": { "@eleicao/model": "*", "fastify": "^5", "@fastify/cors": "^10", "pg": "^8", "dotenv": "^16" },
-  "devDependencies": { "tsx": "^4", "typescript": "^5", "@types/node": "^22", "@types/pg": "^8" } }
+{"name":"@eleicao/api","version":"0.1.0","private":true,"type":"module","scripts":{"dev":"tsx watch src/server.ts","start":"tsx src/server.ts"},"dependencies":{"@eleicao/model":"*","@fastify/compress":"^8.3.1","@fastify/cors":"^10","dotenv":"^16","fastify":"^5","pg":"^8"},"devDependencies":{"@types/node":"^22","@types/pg":"^8","tsx":"^4","typescript":"^5"}}
