@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "node scripts/copy-maplibre.mjs && tsc --noEmit && vite build",
     "preview": "vite preview",
-    "mock": "node mock/server.mjs"
+    "mock": "node mock/server.mjs",
+    "predev": "node scripts/copy-maplibre.mjs"
   },
   "dependencies": {
     "@fontsource-variable/archivo": "^5.3.0",

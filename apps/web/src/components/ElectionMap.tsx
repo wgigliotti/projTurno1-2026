@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import * as maplibregl from 'maplibre-gl';
-import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
 type MLMap = maplibregl.Map;
-maplibregl.setWorkerUrl(workerUrl);
+maplibregl.setWorkerUrl(`${import.meta.env.BASE_URL}maplibre/maplibre-gl-worker.mjs`);   // worker + shared copiados por scripts/copy-maplibre.mjs
 import 'maplibre-gl/dist/maplibre-gl.css';
 import type { Candidato, Unidade } from '../lib/types';
 import { BRASIL_BOUNDS, loadBBox, loadLabels, loadMuniGeo, loadUfGeo } from '../lib/geo';
