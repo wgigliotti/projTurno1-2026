@@ -22,3 +22,13 @@ Simulação com 2022: `MODE=replay SPEED=300 npm run start -w @eleicao/api` (SPE
 
 ## Backtest
 `npx tsx scripts/backtest-all.ts 3|5` (governador/senador por UF e % apurado), `npx tsx scripts/backtest.ts 1` (presidente, replay por horário).
+
+## Publicação (túnel Cloudflare)
+```bash
+npm run build -w @eleicao2026/web         # gera apps/web/dist (a API passa a servir o site em :3001)
+scripts/run-live.sh &                     # API ao vivo (supervisionada)
+scripts/run-tunnel.sh &                   # túnel rápido; a URL pública aparece em data/tunnel.log
+grep -o "https://[a-z0-9-]*\.trycloudflare\.com" data/tunnel.log | tail -1
+```
+- Em modo público os endpoints internos (`/api/foto/agora`, replay) ficam desligados (ligue só local com `ADMIN=1`); a API limita ~1200 req/min por visitante e 400 conexões SSE.
+- O túnel "rápido" muda de URL se reiniciar. Para um nome fixo é preciso conta Cloudflare + domínio (`cloudflared tunnel login`, `tunnel create`, `tunnel route dns`).
