@@ -7,7 +7,7 @@ import { Cargo, CARGO_CODE, CARGOS, Snapshot, Source, SeriePoint, run, seriePoin
 import { UFS } from './ufs.js';
 import type { Candidato, MuniObs, MuniRef } from '@eleicao/model';
 
-const BASE = 'https://resultados.tse.jus.br/oficial/ele2026';
+const BASE = process.env.TSE_BASE ?? 'https://resultados.tse.jus.br/oficial/ele2026';
 const ELE: Record<Cargo, string> = { presidente: '6257', governador: '6259', senador: '6259' };
 const UA = { 'User-Agent': 'Mozilla/5.0 (eleicao2026-projecao; uso academico)' };
 const QF: Record<Cargo, number> = { presidente: 0.9, governador: 0.88, senador: 1.6 };   // senado 2026: 2 votos/eleitor

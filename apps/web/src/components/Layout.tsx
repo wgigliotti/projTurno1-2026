@@ -51,6 +51,7 @@ export function LiveBar() {
   return (
     <div className="live" role="region" aria-label="Estado da apuração">
       {offline && <div className="banner" role="status"><span className="spin" />Reconectando ao servidor… os números abaixo podem estar desatualizados.</div>}
+      {!offline && meta.pctEleitoresApurados < 0.001 && <div className="banner" role="status">Ainda sem urnas apuradas: os valores abaixo são só a expectativa do modelo (baseline da eleição anterior), não um resultado. A apuração começa após as 17h (Brasília).</div>}
       <div className="live-in">
         <span className={`badge ${meta.fonte === 'replay' ? 'replay' : ''} ${offline ? 'off' : ''}`}>
           <span className="dot" aria-hidden />{offline ? 'SEM SINAL' : meta.fonte === 'replay' ? 'REPLAY 2022' : 'AO VIVO'}

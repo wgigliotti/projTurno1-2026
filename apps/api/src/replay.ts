@@ -45,7 +45,7 @@ export class ReplaySource implements Source {
       if (cache.has(t)) continue;
       cache.set(t, compute({ cands: data.cands, munis: rp.advanceTo(t) }, t));
     }
-    return [...cache.entries()].sort((a, b) => a[0] - b[0]).map(e => e[1]);
+    return [...cache.entries()].sort((a, b) => a[0] - b[0]).map(e => e[1]).filter(p => p.pctApurado >= 0.002);   // sem trecho 'só prior'
   }
   start(speed?: number) {
     if (speed) this.speed = speed; this.running = true; this.lastReal = Date.now();
