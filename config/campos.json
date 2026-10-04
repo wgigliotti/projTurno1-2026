@@ -1,0 +1,9 @@
+{
+  "_doc": "Heurística editável: partido -> campo político usado como PRIOR do modelo (o modelo aprende com os dados e corrige). Não é classificação oficial.",
+  "lula": ["PT","PCDOB","PC DO B","PV","PSB","PSOL","REDE","PDT","SOLIDARIEDADE","AGIR"],
+  "bolsonaro": ["PL","PP","REPUBLICANOS","PRTB","PTB","PATRIOTA","PSC","DC","NOVO","UNIÃO","UNIAO","UNIÃO BRASIL","PODE","PODEMOS","MISSÃO","MISSAO"],
+  "porCandidato": {
+    "2026:1:13": "lula", "2026:1:22": "bolsonaro",
+    "2022:1:13": "lula", "2022:1:22": "bolsonaro"
+  }
+}

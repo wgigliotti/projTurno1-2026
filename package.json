@@ -1,0 +1,19 @@
+{
+  "name": "eleicao2026",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "api:live": "MODE=live npm run start -w @eleicao/api",
+    "api:replay": "MODE=replay npm run start -w @eleicao/api",
+    "web": "npm run dev -w @eleicao2026/web",
+    "backtest": "tsx scripts/backtest.ts",
+    "backtest:all": "tsx scripts/backtest-all.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4"
+  }
+}
