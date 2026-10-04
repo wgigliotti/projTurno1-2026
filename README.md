@@ -79,8 +79,4 @@ npm run dev -w @eleicao2026/web
 
 O portal do TSE limita requisições por IP (HTTP 429, com bloqueio de minutos). O poller começa a ~20 req/s, sobe até ~60 req/s e **recua sozinho** se levar um 429. Não rode varreduras paralelas do mesmo IP.
 
-## Autoria
-
-Projeto **idealizado e dirigido por [Willian Gigliotti](https://github.com/wgigliotti)**: definição do problema, regras de negócio, escolhas de produto e as decisões de risco durante a noite da eleição. Implementação com apoio de IA ([Claude Code](https://claude.com/claude-code), da Anthropic).
-
 Os dados são do [TSE](https://dadosabertos.tse.jus.br) e as malhas geográficas do [IBGE](https://www.ibge.gov.br).
