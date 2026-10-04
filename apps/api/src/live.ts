@@ -19,7 +19,7 @@ export function parseU(d: any): Parsed {
   for (const c of d.carg ?? []) for (const a of c.agr ?? []) for (const p of a.par ?? []) for (const k of p.cand ?? []) votos[+k.n] = num(k.vap);
   return {
     secTotal: num(d.s?.ts), secApur: num(d.s?.st), te: num(d.e?.te), est: num(d.e?.est), c: num(d.e?.c),
-    nom: num(d.v?.vnom), br: num(d.v?.vb), nu: num(d.v?.vn), votos, dg: d.dg, hg: d.hg,
+    nom: Object.values(votos).reduce((a, b) => a + b, 0) || num(d.v?.vnom), br: num(d.v?.vb), nu: num(d.v?.vn), votos, dg: d.dg, hg: d.hg,
   };
 }
 export function parseCands(d: any, cargoCode: number, ano = 2026): Candidato[] {

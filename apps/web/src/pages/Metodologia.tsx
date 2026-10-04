@@ -21,6 +21,8 @@ export default function Metodologia() {
       <p>A faixa hachurada em cada barra e o sombreado do gráfico mostram o <b>intervalo de 90%</b>: rodamos milhares de simulações (Monte Carlo) sorteando o resultado das seções pendentes dentro da incerteza estimada. Em 90% das simulações o resultado final cai dentro da faixa. Ela estreita à medida que a apuração avança.</p>
       <p>As mesmas simulações dão as probabilidades de vitória no 1º turno, de ida ao 2º turno, de cada confronto e, para o Senado, de estar entre os dois mais votados.</p>
 
+      <h2>Quão bem funciona? (teste com 2022)</h2>
+      <p>Reproduzimos a chegada real das urnas de 2022 e comparamos a projeção com o resultado final. Para <b>Presidente</b>, com 3% a 97% do eleitorado apurado, o erro médio foi de <b>0,36 ponto percentual</b> e o intervalo de 90% conteve o resultado final em <b>97%</b> das vezes. Para <b>Governador</b> (27 estados), com 50% apurado o erro médio foi de 0,40 p.p., com o líder e o 2º turno corretos em 100% dos casos. Com apenas 5% apurado o erro costuma ficar entre 1 e 2 p.p. Em 2026 há candidatos novos e o Senado tem 2 votos por eleitor, então o desempenho pode diferir.</p>
       <h2>Como ler o mapa</h2>
       <p>Cada região é pintada com a cor do candidato à frente na projeção. Quanto mais forte a cor, maior a margem sobre o segundo colocado. Ao passar o mouse, o painel mostra os percentuais de cada candidato e quanto da região já foi apurado. O voto no exterior aparece em caixa separada porque não tem território.</p>
 

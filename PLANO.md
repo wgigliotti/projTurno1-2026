@@ -1,6 +1,7 @@
 # Plano de Ação: Projeção das Eleições 2026 em tempo real
 
-> Status: **aguardando aprovação**. Nada além da criação do database `eleicoes2026` foi feito.
+> **Status (04/10 ~11h40): fases 0 a 5 concluídas; sistema rodando.** Decisões do usuário: tentar Presidente, Governador e Senador antes das 17h; mapear candidatos a campos; Node/TS inteiro; MapLibre; Exterior em caixa separada; sem deputados; usuário de banco dedicado `eleicoes` (credenciais no `.env`).
+> Resultados e como operar: `docs/backtest.md`, `docs/RUNBOOK.md`, contrato em `docs/API.md`. Pendente: ao vivo depende de confirmar o formato dos arquivos de votação com dados reais (parser validado só com 2024 e com um TSE falso).
 > Data: 04/10/2026 (1º turno). Urnas fecham às 17h (Brasília); o TSE começa a divulgar logo depois.
 
 ## 0. Objetivo
