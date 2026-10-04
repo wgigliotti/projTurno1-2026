@@ -34,6 +34,8 @@ export default function Metodologia() {
         <li>Votos em branco e nulos não entram no percentual de votos válidos usado para decidir a vitória.</li>
         <li>O painel não substitui o resultado oficial, que só o TSE divulga e totaliza.</li>
       </ul>
+      <h2>Autoria e código aberto</h2>
+      <p>Este projeto foi idealizado e dirigido por <b>Willian Gigliotti</b>, que definiu o problema, as regras de negócio (Presidente, Governador e Senador, o mapeamento dos candidatos por campo político, o histórico de fotos a cada 5 minutos) e as decisões de produto e de risco ao longo da noite da eleição. A implementação foi feita com apoio de IA (Claude Code, da Anthropic), com testes de validação em dados reais de 2022. O código completo, o backtest e a documentação estão em <a href="https://github.com/wgigliotti/projTurno1-2026" target="_blank" rel="noopener noreferrer">github.com/wgigliotti/projTurno1-2026</a>. Não é um produto oficial nem tem vínculo com o TSE.</p>
     </article>
   );
 }

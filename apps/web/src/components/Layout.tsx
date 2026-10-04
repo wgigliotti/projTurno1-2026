@@ -71,12 +71,17 @@ export function LiveBar() {
   );
 }
 
+const REPO_URL = 'https://github.com/wgigliotti/projTurno1-2026';
+
 export function Footer() {
   const { meta } = useLive();
   return (
     <footer className="foot">
       <span><b>{AVISO}</b></span>
-      <span>Modelo {meta?.modelo.versao ?? '—'} · <Link to="/metodologia">como calculamos</Link></span>
+      <span>
+        Modelo {meta?.modelo.versao ?? '—'} · <Link to="/metodologia">como calculamos</Link> ·{' '}
+        <a href={REPO_URL} target="_blank" rel="noopener noreferrer">código no GitHub</a> · por Willian Gigliotti
+      </span>
     </footer>
   );
 }
